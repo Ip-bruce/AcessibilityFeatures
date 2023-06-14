@@ -8,6 +8,8 @@ TagManager:
   - JumpSignal
   - LandingSignal
   - Ground
+  - Win
+  - Wall
   layers:
   - Default
   - TransparentFX

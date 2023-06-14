@@ -10,6 +10,9 @@ public class AcessibilityTool : MonoBehaviour
     //AudioControll --------
     bool hasPlayedSound = false;
 
+    public AudioClip WinSound;
+    public AudioClip WallSound;
+
     public AudioClip LandingSignal;
     public AudioClip jumpSignal;
     public AudioSource Audio;
@@ -136,16 +139,25 @@ public class AcessibilityTool : MonoBehaviour
                 {
                     Audio.PlayOneShot(jumpSignal,1.0f);
                     Debug.Log("JumpSOUND");
-                    //Audio.Pause();
                     hasPlayedSound = true;
                 }
                 if(PlayerMovement.triggerTag == "LandingSignal")
                 {
                     Audio.PlayOneShot(LandingSignal,1.0f);
                     Debug.Log("LandingSOUND");
-                    //Audio.Pause();
                     hasPlayedSound = true;
-
+                }
+                if(PlayerMovement.triggerTag == "Wall")
+                {
+                    Audio.PlayOneShot(WallSound,1.0f);
+                    Debug.Log("WallSOUND");
+                    hasPlayedSound = true;
+                }
+                if(PlayerMovement.triggerTag == "Win")
+                {
+                    Audio.PlayOneShot(WinSound,1.0f);
+                    Debug.Log("WINSOUND");
+                    hasPlayedSound = true;
                 }
             }
         }

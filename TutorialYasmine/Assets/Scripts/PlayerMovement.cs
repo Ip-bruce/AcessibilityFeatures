@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -49,12 +50,17 @@ public class PlayerMovement : MonoBehaviour
         {
             Audio.PlayOneShot(LandingSound,1.0f);
         }
+        if(other.gameObject.CompareTag("Win"))
+        {
+           StartCoroutine(Wait());
+        }
+        
        
     }
     private void OnTriggerEnter2D(Collider2D other) 
     {
         
-        if(other.gameObject.CompareTag("JumpSignal")||other.gameObject.CompareTag("LandingSignal"))
+        if(other.gameObject.CompareTag("JumpSignal")||other.gameObject.CompareTag("LandingSignal")||other.gameObject.CompareTag("Wall")||other.gameObject.CompareTag("Win"))
         {
             triggerTag = other.tag;
             Debug.Log(triggerTag);
@@ -64,11 +70,24 @@ public class PlayerMovement : MonoBehaviour
     }
     private void OnTriggerExit2D(Collider2D other) 
     {
-        if(other.gameObject.CompareTag("JumpSignal")||other.gameObject.CompareTag("LandingSignal"))
+        if(other.gameObject.CompareTag("JumpSignal")||other.gameObject.CompareTag("LandingSignal")||other.gameObject.CompareTag("Wall")||other.gameObject.CompareTag("Win"))
         {
             triggerTag = "None";
             Debug.Log(triggerTag);
         }      
+    }
+
+     IEnumerator Wait()
+    {
+        //Print the time of when the function is first called.
+        Debug.Log("Started Coroutine at timestamp : " + Time.time);
+
+        //yield on a new YieldInstruction that waits for 5 seconds.
+        yield return new WaitForSeconds(2);
+
+        //After we have waited 5 seconds print the time again.
+        Debug.Log("Finished Coroutine at timestamp : " + Time.time);
+        SceneManager.LoadScene("Win");
     }
 
 }
