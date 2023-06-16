@@ -54,6 +54,10 @@ public class PlayerMovement : MonoBehaviour
         {
            StartCoroutine(Wait());
         }
+        if(other.gameObject.CompareTag("Die"))
+        {
+           Die();
+        }
         
        
     }
@@ -88,6 +92,11 @@ public class PlayerMovement : MonoBehaviour
         //After we have waited 5 seconds print the time again.
         Debug.Log("Finished Coroutine at timestamp : " + Time.time);
         SceneManager.LoadScene("Win");
+    }
+
+    void Die()
+    {
+        SceneManager.LoadScene("Game");
     }
 
 }
